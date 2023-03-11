@@ -9,11 +9,8 @@ require('mason-lspconfig').setup({
 })
 
 
-local cmp = require('cmp')
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
--- cmp mappings?
 
 local lsp_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
@@ -63,7 +60,28 @@ require('mason-lspconfig').setup_handlers({
                     }
                 }
             }
+        }
+    end,
+    ['rust_analyzer'] = function ()
+        lspconfig['rust_analyzer'].setup {
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+            settings = {
+                ["rust_analyzer"] = {
+                    cargo = {
+                        buildScripts = {
+                            enable = true
+                        }
+                    },
+                    procMacro = {
+                        enable = true
+                    },
+                    check = {
+                        command = "clippy"
+                    },
 
+                }
+            }
         }
     end
 })
@@ -82,4 +100,8 @@ vim.diagnostic.config({
         header = '',
         prefix = '',
     },
+})
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded"
 })

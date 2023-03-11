@@ -29,7 +29,7 @@ cmp.setup({
         end,
     },
     window = {
-
+        completion = cmp.config.window.bordered(),
     },
     mapping = mapping,
     sources = cmp.config.sources({
@@ -39,3 +39,12 @@ cmp.setup({
         { name = 'buffer' },
     })
 })
+
+cmp.setup.filetype('lua', {
+    sources = cmp.config.sources({
+        { name='nvim_lua'},
+    }, {
+        { name = 'buffer' },
+    })
+})
+

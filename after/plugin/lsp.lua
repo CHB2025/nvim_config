@@ -8,6 +8,11 @@ require('mason-lspconfig').setup({
     }
 })
 
+-- Diagnostic globals
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -20,7 +25,6 @@ local lsp_attach = function(client, bufnr)
         vim.cmd.LspStop('eslint')
         return
     end
-
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -62,7 +66,7 @@ require('mason-lspconfig').setup_handlers({
             }
         }
     end,
-    ['rust_analyzer'] = function ()
+    ['rust_analyzer'] = function()
         lspconfig['rust_analyzer'].setup {
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,

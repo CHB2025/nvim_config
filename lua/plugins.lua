@@ -40,7 +40,9 @@ return require('packer').startup(function(use)
         end
     }
     use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+
     use('tpope/vim-fugitive')
+    use({ 'lewis6991/gitsigns.nvim', tag = 'release' })
 
     -- lsp and cmp
     use {
@@ -59,11 +61,10 @@ return require('packer').startup(function(use)
         -- Snippets
         'L3MON4D3/LuaSnip',
         'rafamadriz/friendly-snippets',
+
+        -- Progress Indicator
+        'j-hui/fidget.nvim',
     }
-
-
-
-
 
     if packer_bootstrap then
         require('packer').sync()

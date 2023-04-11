@@ -81,7 +81,8 @@ require('mason-lspconfig').setup_handlers({
                         enable = true
                     },
                     check = {
-                        command = "clippy"
+                        command = "clippy",
+                        features = "all"
                     },
 
                 }
@@ -89,6 +90,8 @@ require('mason-lspconfig').setup_handlers({
         }
     end
 })
+
+require("fidget").setup {}
 
 vim.diagnostic.config({
     virtual_text = true,

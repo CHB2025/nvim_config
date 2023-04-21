@@ -18,9 +18,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lsp_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
     if client.name == 'eslint' then
         vim.cmd.LspStop('eslint')
         return
@@ -71,18 +68,18 @@ require('mason-lspconfig').setup_handlers({
             on_attach = lsp_attach,
             capabilities = lsp_capabilities,
             settings = {
-                ["rust_analyzer"] = {
+                ["rust-analyzer"] = {
                     cargo = {
                         buildScripts = {
                             enable = true
-                        }
+                        },
+                        features = "all"
                     },
                     procMacro = {
                         enable = true
                     },
                     check = {
-                        command = "clippy",
-                        features = "all"
+                        command = "clippy"
                     },
 
                 }

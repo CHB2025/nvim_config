@@ -42,7 +42,7 @@ return require('packer').startup(function(use)
     use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 
     use('tpope/vim-fugitive')
-    use({ 'lewis6991/gitsigns.nvim', tag = 'release' })
+    use({ 'lewis6991/gitsigns.nvim' })
 
     -- lsp and cmp
     use {
